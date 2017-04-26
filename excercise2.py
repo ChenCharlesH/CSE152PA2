@@ -2,7 +2,7 @@
 # @Date:   04-22-2017
 # @Project: PA2
 # @Last modified by:   Hsien-Che Charles Chen
-# @Last modified time: 04-25-2017
+# @Last modified time: 04-26-2017
 
 import plot_square as ps
 import numpy as np
@@ -37,6 +37,9 @@ def display(part, k, rt, result):
 	print "Resulting points: "
 	for i, vert in enumerate(result):
 		print "X_" + str(i) + " = " + str(vert)
+
+	# Inject one more element because plot_square needs it...
+	result.append((0,0))
 
 	print "Plotting..."
 	ps.plot_square(result, X[0], X[1], Y[0], Y[1])
