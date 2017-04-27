@@ -26,13 +26,33 @@ def part1(verts_3d):
 	result = equationMul(k, rt, verts_3d)
 	display(1, k, rt, result)
 
+# Calculates matrices for part 2.
+def part2(verts_3d):
+	k = np.identity(3)
+	rt = np.matrix('1 0 0 0; 0 1 0 0; 0 0 1 2')
+	result = equationMul(k, rt, verts_3d)
+	display(2, k, rt, result)
+
+# Calculates matrices for part 3.
+def part3(verts_3d):
+	k = np.identity(3)
+	r_x = np.matrix([[1.0, 0, 0], [0, np.sqrt(2)/2, -np.sqrt(2)/2], [0, np.sqrt(2)/2, np.sqrt(2)/2]])
+	r_z = np.matrix([[0.5, -np.sqrt(3)/2, 0], [np.sqrt(3)/2, 0.5, 0], [0, 0, 1]])
+	r = np.matmul(r_x, r_z)
+	t = np.array([0, 0, 2])
+	rt = np.hstack((r, np.atleast_2d(t).T))
+	result = equationMul(k, rt, verts_3d)
+	display(3, k, rt, result)
+
 # Helper function to display part.
 def display(part, k, rt, result):
 	print "Calculating Part " + str(part) + ": \n"
 	print "K = "
 	print k
+	print ""
 	print "[R|t] = "
 	print rt
+	print ""
 
 	print "Resulting points: "
 	for i, vert in enumerate(result):
@@ -41,7 +61,7 @@ def display(part, k, rt, result):
 	# Inject one more element because plot_square needs it...
 	result.append((0,0))
 
-	print "Plotting..."
+	print "\nPlotting..."
 	ps.plot_square(result, X[0], X[1], Y[0], Y[1])
 
 # Helper function to multiply points by the camera equation given
@@ -60,6 +80,8 @@ def equationMul(k, rt, verts_3d):
 # Call this function to execute file.
 def execute_excercise2():
 	part1(VERTS_3D)
+	part2(VERTS_3D)
+	part3(VERTS_3D)
 
 if __name__ == "__main__":
 	execute_excercise2()
